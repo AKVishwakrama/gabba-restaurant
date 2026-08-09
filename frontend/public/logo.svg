@@ -1,7 +1,0 @@
-<svg width="240" height="50" viewBox="0 0 240 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="240" height="50" rx="12" fill="#0D0D0D"/>
-  <path d="M24 25C24 16.7157 30.7157 10 39 10H43C51.2843 10 58 16.7157 58 25V30H45V25C45 23.3431 43.6569 22 42 22H39C37.3431 22 36 23.3431 36 25V30H24V25Z" fill="#FFCC00"/>
-  <path d="M72 19H84L92 33H80L78.5 30H68.5L67 33H55L63 19H75L72 24H66L63 19H72Z" fill="#FF3B3B"/>
-  <text x="102" y="34" fill="#FF3B3B" font-family="Arial Black, Arial, sans-serif" font-size="28">GABA</text>
-  <text x="102" y="47" fill="#FFCC00" font-family="Arial, sans-serif" font-size="11">Grab a bite</text>
-</svg>

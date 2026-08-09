@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
+import GoogleSignIn from "../components/GoogleSignIn.jsx";
 
 export default function Login() {
   const { login } = useAuth();
@@ -18,7 +19,11 @@ export default function Login() {
     setError("");
     setLoading(true);
     try {
-      const data = await login(form);
+      const payload = {
+        email: form.email.trim().toLowerCase(),
+        password: form.password,
+      };
+      const data = await login(payload);
       navigate(data.user?.is_admin ? "/admin" : "/");
     } catch (err) {
       setError(err.response?.data?.error || "Login failed. Check your details and try again.");
@@ -44,9 +49,7 @@ export default function Login() {
         </form>
 
         <div className="divider-or">or</div>
-        <button type="button" className="google-btn" onClick={() => window.alert("Google sign-in will be connected to your provider soon.")}> 
-          Continue with Google
-        </button>
+       
 
         <p className="auth-foot">New to Gabba? <Link to="/signup">Create an account</Link></p>
       </div>

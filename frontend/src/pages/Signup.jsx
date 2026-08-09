@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
+// import GoogleSignIn from "../components/GoogleSignIn.jsx";
 
 export default function Signup() {
   const { register } = useAuth();
@@ -18,7 +19,11 @@ export default function Signup() {
     setError("");
     setLoading(true);
     try {
-      await register(form);
+      const payload = {
+        ...form,
+        email: form.email.trim().toLowerCase(),
+      };
+      await register(payload);
       navigate("/");
     } catch (err) {
       setError(err.response?.data?.error || "Signup failed. Please try again.");
@@ -50,9 +55,7 @@ export default function Signup() {
         </form>
 
         <div className="divider-or">or</div>
-        <button type="button" className="google-btn" onClick={() => window.alert("Google sign-in will be connected to your provider soon.")}> 
-          Continue with Google
-        </button>
+        
 
         <p className="auth-foot">Already have an account? <Link to="/login">Login</Link></p>
       </div>

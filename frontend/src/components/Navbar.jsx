@@ -2,7 +2,6 @@ import React from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useCart } from "../context/CartContext.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
-import GoogleSignIn from "./GoogleSignIn.jsx";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -22,29 +21,24 @@ export default function Navbar() {
   return (
     <header className="navbar nav-tube">
       <Link to="/" className="logo logo-image">
-        <img src="/logo.svg" alt="Gabba logo" />
+        <img src="/logo1.png" alt="Gabba logo" />
       </Link>
       <nav>
-        <button type="button" className="nav-link" onClick={() => scrollToId("hero")}>Home</button>
-        <button type="button" className="nav-link" onClick={() => scrollToId("menu")}>Online Orders</button>
-        <button type="button" className="nav-link" onClick={() => scrollToId("menu")}>Menus</button>
-        <button type="button" className="nav-link" onClick={() => scrollToId("shop")}>Shop</button>
-        <button type="button" className="nav-link" onClick={() => scrollToId("contact")}>Book Online</button>
-        <Link to="/cart" className="cart-pill">
+        <Link to="/" className="nav-link">Home</Link>
+        <Link to="/menu" className="nav-link">Menu</Link>
+        <Link to="/cart" className={totalCount > 0 ? "cart-pill" : "nav-link"}>
           Cart {totalCount > 0 && `(${totalCount})`}
         </Link>
-        <div style={{ marginLeft: 12 }}>
-          <GoogleSignIn />
-        </div>
+
         {user ? (
           <>
-            {user.is_admin && <Link to="/admin">Owner Dashboard</Link>}
+            {user.is_admin && <Link to="/admin" className="nav-link">Owner Dashboard</Link>}
             <button className="link" onClick={logout}>Logout</button>
           </>
         ) : (
           <>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Signup</Link>
+            <Link to="/login" className="nav-link">Login</Link>
+            <Link to="/signup" className="nav-link">Signup</Link>
           </>
         )}
       </nav>

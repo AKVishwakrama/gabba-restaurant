@@ -4,10 +4,11 @@ const pool = require("./db");
 
 const items = [
   // Burgers (main focus)
-  ["Gabba Smash Burger", "Double smashed beef patty, cheddar, house sauce, brioche bun", "Burger", 189, "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600", false, true, true],
+  ["Gabba Smash Burger", "Double smashed beef patty, cheddar, house sauce, brioche bun", "Burger", 189, "/menu-images/menu-01.jpeg", false, true, true],
   ["Spicy Paneer Blast Burger", "Crispy paneer patty, jalapenos, spicy mayo", "Burger", 159, "https://images.unsplash.com/photo-1550317138-10000687a72b?w=600", true, true, true],
   ["Classic Chicken Zinger", "Crispy fried chicken, lettuce, tangy mayo", "Burger", 179, "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=600", false, true, true],
   ["Cheese Overload Burger", "4 cheese layers, beef patty, caramelized onions", "Burger", 209, "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=600", false, true, false],
+  ["Cheese Overload Burger", "4 cheese layers, beef patty, caramelized onions", "Burger", 209, "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=600", false, true, false]
 
   // Pizza
   ["Margherita Fireball", "Mozzarella, basil, tomato, chilli oil", "Pizza", 249, "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600", true, true, true],
@@ -26,6 +27,8 @@ const items = [
   // Drinks
   ["Cold Coffee Shake", "Classic thick cold coffee shake", "Drinks", 99, "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=600", true, true, false],
   ["Masala Lemonade", "Fresh lime with Gabba masala twist", "Drinks", 69, "https://images.unsplash.com/photo-1621263764928-df1444c5e859?w=600", true, true, false],
+    ["Masala chut", "Fresh lime with Gabba masala twist", "Drinks", 69, "https://images.unsplash.com/photo-1621263764928-df1444c5e859?w=600", true, true, false]
+
 ];
 
 async function seed() {

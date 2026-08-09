@@ -6,6 +6,11 @@ const { authOptional } = require("../middleware/auth");
 
 const router = express.Router();
 
+const JWT_SECRET = process.env.JWT_SECRET || "GabbaRestaurant2026@JWT";
+if (!process.env.JWT_SECRET) {
+  console.warn("Warning: JWT_SECRET is not set in environment variables. Using default development secret.");
+}
+
 const https = require("https");
 const crypto = require("crypto");
 
@@ -14,8 +19,9 @@ router.post("/register", async (req, res) => {
   if (!name || !email || !password) {
     return res.status(400).json({ error: "name, email, and password are required" });
   }
+  const normalizedEmail = email.trim().toLowerCase();
   try {
-    const existing = await pool.query("SELECT id FROM users WHERE email = $1", [email]);
+    const existing = await pool.query("SELECT id FROM users WHERE email = $1", [normalizedEmail]);
     if (existing.rows.length > 0) {
       return res.status(409).json({ error: "An account with this email already exists" });
     }
@@ -23,10 +29,10 @@ router.post("/register", async (req, res) => {
     const result = await pool.query(
       `INSERT INTO users (name, email, password_hash, phone, address)
        VALUES ($1,$2,$3,$4,$5) RETURNING id, name, email, phone, address`,
-      [name, email, password_hash, phone || null, address || null]
+      [name, normalizedEmail, password_hash, phone || null, address || null]
     );
     const user = result.rows[0];
-    const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: "7d" });
+    const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: "7d" });
     res.status(201).json({ user, token });
   } catch (err) {
     console.error(err);
@@ -39,8 +45,9 @@ router.post("/login", async (req, res) => {
   if (!email || !password) {
     return res.status(400).json({ error: "email and password are required" });
   }
+  const normalizedEmail = email.trim().toLowerCase();
   try {
-    const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+    const result = await pool.query("SELECT * FROM users WHERE email = $1", [normalizedEmail]);
     if (result.rows.length === 0) {
       return res.status(401).json({ error: "Invalid email or password" });
     }
@@ -49,7 +56,7 @@ router.post("/login", async (req, res) => {
     if (!match) {
       return res.status(401).json({ error: "Invalid email or password" });
     }
-    const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: "7d" });
+    const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: "7d" });
     delete user.password_hash;
     res.json({ user, token });
   } catch (err) {
@@ -116,7 +123,7 @@ router.post("/google", async (req, res) => {
       user = insert.rows[0];
     }
 
-    const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: "7d" });
+    const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: "7d" });
     res.json({ user, token });
   } catch (err) {
     console.error("Google auth failed", err);
