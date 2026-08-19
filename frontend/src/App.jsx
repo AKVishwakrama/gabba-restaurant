@@ -10,6 +10,7 @@ import OrderConfirmation from "./pages/OrderConfirmation.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import Admin from "./pages/Admin.jsx";
+import AdminRoute from "./components/AdminRoute.jsx";
 
 export default function App() {
   return (
@@ -23,7 +24,7 @@ export default function App() {
         <Route path="/order-confirmation/:id" element={<OrderConfirmation />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin" element={ <AdminRoute> <Admin /> </AdminRoute>}/>
       </Routes>
       <Footer />
     </>

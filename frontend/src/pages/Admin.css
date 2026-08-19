@@ -1,0 +1,243 @@
+/* =========================================================
+   GABBA ADMIN DASHBOARD
+   ========================================================= */
+
+.admin-page {
+  width: min(1450px, 94%);
+  margin: 0 auto;
+  padding: 110px 0 70px;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.admin-eyebrow {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #f97316;
+}
+
+.admin-header h1 {
+  margin: 0;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 900;
+}
+
+.admin-header p {
+  margin-top: 8px;
+  color: #6b7280;
+}
+
+.admin-welcome {
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: #fff7ed;
+  color: #9a3412;
+  font-weight: 700;
+}
+
+/* Tabs */
+
+.admin-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 12px;
+}
+
+.admin-tabs button {
+  border: 0;
+  background: transparent;
+  padding: 11px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.admin-tabs button:hover {
+  background: #f3f4f6;
+}
+
+.admin-tabs button.active {
+  background: #111827;
+  color: white;
+}
+
+/* Stats */
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.admin-stat-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+.admin-stat-card span {
+  display: block;
+  color: #6b7280;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.admin-stat-card strong {
+  display: block;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.admin-stat-card small {
+  display: block;
+  margin-top: 8px;
+  color: #9ca3af;
+}
+
+/* Panels */
+
+.admin-panel {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  padding: 25px;
+  margin-bottom: 22px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+}
+
+.admin-panel h2 {
+  margin: 0 0 5px;
+  font-size: 20px;
+}
+
+.admin-panel > p {
+  color: #6b7280;
+  margin-top: 0;
+}
+
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+/* Charts */
+
+.admin-chart-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 22px;
+}
+
+.admin-chart-large {
+  min-width: 0;
+}
+
+/* Two columns */
+
+.admin-two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+/* Tables */
+
+.admin-table-wrapper {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px;
+}
+
+.admin-table th {
+  text-align: left;
+  padding: 14px;
+  background: #f9fafb;
+  color: #6b7280;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.admin-table td {
+  padding: 15px 14px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.admin-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.status-badge {
+  display: inline-flex;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #f3f4f6;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Responsive */
+
+@media (max-width: 1200px) {
+  .admin-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .admin-chart-grid,
+  .admin-two-column {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 650px) {
+  .admin-page {
+    width: 92%;
+    padding-top: 90px;
+  }
+
+  .admin-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .admin-tabs {
+    overflow-x: auto;
+  }
+
+  .admin-stat-card {
+    padding: 16px;
+  }
+
+  .admin-stat-card strong {
+    font-size: 22px;
+  }
+}
