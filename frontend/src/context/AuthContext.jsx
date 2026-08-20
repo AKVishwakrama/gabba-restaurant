@@ -65,10 +65,22 @@ import api from "../api/api.js";
 const AuthContext = createContext(null);
 const STORAGE_KEY = "gabba_token";
 
+function normalizeUser(user) {
+  if (!user) return null;
+
+  return {
+    ...user,
+
+    // Support backend naming: is_admin
+    // and frontend naming: isAdmin
+    isAdmin: user.is_admin === true || user.isAdmin === true,
+  };
+}
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  // IMPORTANT: start with true while checking saved token
+  // Check saved token when app starts
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -83,7 +95,14 @@ export function AuthProvider({ children }) {
       .get("/auth/me")
       .then((res) => {
         console.log("Logged-in user:", res.data.user);
-        setUser(res.data.user);
+        console.log("Backend admin status:", res.data.user?.is_admin);
+
+        const normalizedUser = normalizeUser(res.data.user);
+
+        console.log("Normalized user:", normalizedUser);
+        console.log("Frontend admin status:", normalizedUser?.isAdmin);
+
+        setUser(normalizedUser);
       })
       .catch((err) => {
         console.error("Auth check failed:", err);
@@ -100,13 +119,21 @@ export function AuthProvider({ children }) {
     const res = await api.post("/auth/login", payload);
 
     console.log("Login response:", res.data);
-    console.log("Admin status:", res.data.user?.is_admin);
+    console.log("Backend admin status:", res.data.user?.is_admin);
 
     localStorage.setItem(STORAGE_KEY, res.data.token);
 
-    setUser(res.data.user);
+    const normalizedUser = normalizeUser(res.data.user);
 
-    return res.data;
+    console.log("Normalized login user:", normalizedUser);
+    console.log("Frontend admin status:", normalizedUser?.isAdmin);
+
+    setUser(normalizedUser);
+
+    return {
+      ...res.data,
+      user: normalizedUser,
+    };
   }
 
   async function register(payload) {
@@ -114,9 +141,14 @@ export function AuthProvider({ children }) {
 
     localStorage.setItem(STORAGE_KEY, res.data.token);
 
-    setUser(res.data.user);
+    const normalizedUser = normalizeUser(res.data.user);
 
-    return res.data;
+    setUser(normalizedUser);
+
+    return {
+      ...res.data,
+      user: normalizedUser,
+    };
   }
 
   function logout() {
