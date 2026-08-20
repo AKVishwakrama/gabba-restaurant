@@ -28,7 +28,7 @@ const createMenuTags = (name) => {
   if (/paneer/.test(normalized)) tags.push("Paneer special");
   if (/aloo\s*tikki|aloo|potato/.test(normalized)) tags.push("Crispy snack");
   if (/cold\s*coffee|iced\s*coffee|coffee/.test(normalized)) tags.push("Cool drink");
-  if (tags.length === 0) tags.push("land");
+  if (tags.length === 0) tags.push("popular");
   return tags.slice(0, 2);
 };
 
