@@ -1433,3 +1433,44 @@ footer.site-footer {
     transition: none !important;
   }
 }
+
+.delivery-offer {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  margin-bottom: 18px;
+  border: 2px solid #f5b400;
+  border-radius: 999px;
+  background: #fff7d6;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.08);
+}
+
+.delivery-offer-star {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #ffb000;
+  color: #111;
+  font-size: 15px;
+}
+
+.delivery-offer div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.delivery-offer strong {
+  font-size: 14px;
+  font-weight: 800;
+  color: #171717;
+}
+
+.delivery-offer small {
+  font-size: 11px;
+  color: #666;
+}

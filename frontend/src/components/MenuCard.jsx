@@ -20,17 +20,39 @@ const fallbackImageFor = (name) => {
   return "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=900&q=80";
 };
 
+// const createMenuTags = (name) => {
+//   const normalized = name.toLowerCase();
+//   const tags = [];
+//   if (/cheese|cheesiyo|double|double\s*chees|mackano|maxicano|grab/.test(normalized)) tags.push("Cheesy hit");
+//   if (/peri|periperi/.test(normalized)) tags.push("Peri Peri");
+//   if (/paneer/.test(normalized)) tags.push("Paneer special");
+//   if (/aloo\s*tikki|aloo|potato/.test(normalized)) tags.push("Crispy snack");
+//   if (/cold\s*coffee|iced\s*coffee|coffee/.test(normalized)) tags.push("Cool drink");
+//   if (tags.length === 0) tags.push("popular");
+//   return tags.slice(0, 2);
+// };
+
+
 const createMenuTags = (name) => {
   const normalized = name.toLowerCase();
-  const tags = [];
-  if (/cheese|cheesiyo|double|double\s*chees|mackano|maxicano|grab/.test(normalized)) tags.push("Cheesy hit");
-  if (/peri|periperi/.test(normalized)) tags.push("Peri Peri");
-  if (/paneer/.test(normalized)) tags.push("Paneer special");
-  if (/aloo\s*tikki|aloo|potato/.test(normalized)) tags.push("Crispy snack");
-  if (/cold\s*coffee|iced\s*coffee|coffee/.test(normalized)) tags.push("Cool drink");
-  if (tags.length === 0) tags.push("popular");
-  return tags.slice(0, 2);
+
+  if (/burgab/.test(normalized)) return ["Signature Bite"];
+  if (/paneer patty/.test(normalized)) return ["Gabba Special"];
+  if (/^paneer$/.test(normalized)) return ["Crispy Patty"];
+  if (/cheese/.test(normalized) && !/paneer/.test(normalized)) return ["Extra Cheesy"];
+  if (/cheesio loaded/.test(normalized)) return ["Loaded & Juicy"];
+  if (/chessy patty/.test(normalized)) return ["Cheesy Goodness"];
+  if (/double decker peri peri/.test(normalized)) return ["Big Bite"];
+  if (/grab maxicano/.test(normalized)) return ["Flavor Bomb"];
+  if (/mexicano blast/.test(normalized)) return ["Spicy Kick"];
+  if (/peri peri fries/.test(normalized)) return ["Crispy & Fresh"];
+  if (/salted fries/.test(normalized)) return ["Classic Favorite"];
+  if (/cold coffee/.test(normalized)) return ["Cool & Creamy"];
+  if (/aloo tikki/.test(normalized)) return ["Crispy Snack"];
+
+  return ["Must Try"];
 };
+
 
 const ratingFromName = (name) => {
   const base = 80 + (name.length % 10);

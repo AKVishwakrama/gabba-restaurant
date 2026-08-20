@@ -30,7 +30,12 @@ router.post("/", authOptional, async (req, res) => {
 
     const subtotal = items.reduce((sum, it) => sum + Number(it.price) * Number(it.quantity), 0);
     const tax = +(subtotal * TAX_RATE).toFixed(2);
-    const total = +(subtotal + DELIVERY_FEE + tax).toFixed(2);
+
+    // Free delivery on orders of ₹199 or more
+    // const total = +(subtotal + DELIVERY_FEE + tax).toFixed(2);
+    const deliveryFee = subtotal >= 199 ? 0 : DELIVERY_FEE;
+    const total = +(subtotal + deliveryFee + tax).toFixed(2);
+
     const payment_status = payment_method === "razorpay" && razorpay_payment_id ? "paid" : "pending";
 
     const delivery_area = delivery_address.split(",")[1]?.trim() || "Unknown";
@@ -47,7 +52,7 @@ router.post("/", authOptional, async (req, res) => {
         delivery_address,
         delivery_area,
         subtotal,
-        DELIVERY_FEE,
+        deliveryFee,
         tax,
         total,
         payment_method || "cod",

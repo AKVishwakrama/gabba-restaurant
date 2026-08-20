@@ -21,6 +21,21 @@ export default function Home() {
       <Hero />
 
       <section className="home-intro page-wrap">
+
+
+
+        <div className="delivery-offer">
+  <span className="delivery-offer-star">★</span>
+  <div>
+    <strong>FREE DELIVERY ON ORDERS ₹199+</strong>
+    <small>Regular delivery charge: ₹40</small>
+  </div>
+</div>
+
+
+
+
+
         <div className="home-intro-copy">
           <span className="hero-badge">Gabba Grab A Bite</span>
           <h2>Veg burgers that actually hit different.</h2>
